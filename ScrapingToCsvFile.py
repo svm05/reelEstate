@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 from csv import writer
 
+DEFAULT_VALUE = 'Not specified'
+
 
 url = "https://www.realtor.com/realestateandhomes-search/Stockton_CA/show-newest-listings"
 headers = {
@@ -26,11 +28,11 @@ with open('housing.csv', 'w', encoding='utf8', newline='') as f:
             owner = ow[1]
             infos = list.find_all('span', class_="jsx-946479843 meta-value")
             for i in range(len(infos)):
-                infos[i] = infos[i].text if infos[i] != None else 'Not specified'
-            location = location.text if location != None else 'Not specified'
-            price = price.text if price != None else 'Not specified'
-            owner = owner.text if owner != None else 'Not specified'
-            status = status.text if status != None else 'Not specified'
+                infos[i] = infos[i].text if infos[i] != None else DEFAULT_VALUE
+            location = location.text if location != None else DEFAULT_VALUE
+            price = price.text if price != None else DEFAULT_VALUE
+            owner = owner.text if owner != None else DEFAULT_VALUE
+            status = status.text if status != None else DEFAULT_VALUE
             info = [location, status, price, owner]
             for i in range(len(infos)):
                 info.append(infos[i])
